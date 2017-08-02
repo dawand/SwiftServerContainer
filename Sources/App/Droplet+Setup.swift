@@ -18,6 +18,9 @@ extension Droplet {
                     username = u
                     manager.connections[u] = ws
                     manager.transceive("\(u) is connected")
+                    
+                //   print(SysInfo.CPU)
+                    Benchmark.runBenchmark()
                 }
                 
                 if let u = username, let m = json.object?["message"]?.string {
@@ -35,6 +38,17 @@ extension Droplet {
                     manager.sendResult(name: u, result: words, timeInSec: abs(time))
                 }
                 
+                if let u = username,
+                    let t = json.object?["Sorting"]?.string,
+                    let s = json.object?["start"]?.int,
+                    let e = json.object?["end"]?.int
+                {
+                    print("File name: \(t)")
+                    let startTime = Date()
+                    let words = SortText(start:s,end:e)
+                    let time = startTime.timeIntervalSinceNow
+                    manager.sendResult(name: u, result: words.count, timeInSec: abs(time))
+                }
             }
             
             ws.onClose = { ws, _, _, _ in

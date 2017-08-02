@@ -7,8 +7,9 @@ class Manager {
         send(name: "transceiver: ", message: message)
     }
     
+//    func sendResult<T>(name: String, result: T, timeInSec: Double){
     func sendResult(name: String, result: Int, timeInSec: Double){
-        print("Number of words found: \(result) in \(timeInSec) seconds")
+        print("Result: \(result) in \(timeInSec) seconds")
         
         let resultNode : [String: NodeRepresentable] = [
             "username": name,
@@ -22,13 +23,10 @@ class Manager {
         
         print("sending \(json)")
         
-        for (username, socket) in connections {
+        for (_, socket) in connections {
             //	guard username != name else {
             //		continue
             //	}
-            
-            //			print(username)
-            //			print(socket)
             
             try? socket.send(json)
         }
