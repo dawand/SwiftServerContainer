@@ -7,6 +7,13 @@
 //
 
 import Foundation
+import CoreFoundation
+
+#if os(Linux)
+    import Glibc
+#else
+    import Darwin
+#endif
 
 open class MCTimer {
     fileprivate var startTime: CFAbsoluteTime

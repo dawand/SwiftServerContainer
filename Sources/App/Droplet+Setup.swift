@@ -4,8 +4,13 @@ let manager = Manager()
 
 extension Droplet {
     public func setup() throws {
+	
+	 Benchmark.runBenchmark()
+
         get("/") { _ in
             try self.view.make("index.html")
+	
+	  // debugging
         }
         
         socket("connect") { req, ws in
@@ -20,7 +25,7 @@ extension Droplet {
                     manager.transceive("\(u) is connected")
                     
                 //   print(SysInfo.CPU)
-                    Benchmark.runBenchmark()
+                //    Benchmark.runBenchmark()
                 }
                 
                 if let u = username, let m = json.object?["message"]?.string {

@@ -1,9 +1,22 @@
 class Benchmark{
     
     class func runBenchmark(){
-        let workload = MandelbrotWorkload(width: 800, height: 800)
+        
+        //Mandelbrot
+        let workload = MandelbrotWorkload(width: 1600, height: 1600)
         let result = workload.run()
         printResult(result)
+        
+        // FFT
+        let workload2 = SFFTWorkload(size: 8 * 2048 * 2048, chunkSize: 4096)
+        let result2 = workload2.run()
+        printResult(result2)
+
+        // Fibonnaci
+        let workload3 = FibonacciWorkload(n: 40)
+        let result3 = workload3.run()
+        printResult(result3)
+        
     }
     
     class func printResult(_ result : WorkloadResult) {
