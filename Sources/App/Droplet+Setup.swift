@@ -8,9 +8,7 @@ extension Droplet {
 	 Benchmark.runBenchmark()
 
         get("/") { _ in
-            try self.view.make("index.html")
-	
-	  // debugging
+            try self.view.make("index.html")	
         }
         
         socket("connect") { req, ws in
@@ -23,8 +21,9 @@ extension Droplet {
                     username = u
                     manager.connections[u] = ws
                     manager.transceive("\(u) is connected")
-                    
-                //   print(SysInfo.CPU)
+                  
+		// DEBUG
+                //    print(SysInfo.CPU)
                 //    Benchmark.runBenchmark()
                 }
                 
@@ -48,7 +47,6 @@ extension Droplet {
                     let s = json.object?["start"]?.int,
                     let e = json.object?["end"]?.int
                 {
-                    print("File name: \(t)")
                     let startTime = Date()
                     let words = SortText(start:s,end:e)
                     let time = startTime.timeIntervalSinceNow
